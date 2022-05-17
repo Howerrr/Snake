@@ -35,7 +35,7 @@ function randomY() {
   return Math.round(Math.random() * (wall.offsetHeight / 50 - 4) + 1) * 50;
 }
 
-function resetTarget() {
+function setTarget() {
   targetX = randomX();
   targetY = randomY();
   for (let i = 0; i < body.length; i++) {
@@ -53,7 +53,7 @@ function resetTarget() {
   target.style.top = targetY + 'px';
 }
 
-function resetHead() {
+function setHead() {
   headX = randomX();
   headY = randomY();
   head.style.left = headX + 'px';
@@ -105,15 +105,15 @@ function setBody(dir) {
 function gameBegin() {
   ground.style.width = wall.offsetWidth - 100 + 'px';
   ground.style.height = wall.offsetHeight - 100 + 'px';
-  resetTarget();
-  resetHead();
+  setTarget();
+  setHead();
 }
 
 function isGetTarget(dir) {
   if (targetX === head.offsetLeft && targetY === head.offsetTop) {
     single = false;
     times++;
-    resetTarget();
+    setTarget();
     setBody(dir);
   }
 }
@@ -158,8 +158,8 @@ function gameOver() {
   score = Math.round(times * 3.5 * (1 + 2 / (time + 1)));
   if (score > 100) score = 100;
   alert('本次你坚持了' + time + '秒，吃到了' + times + '次红方块，系统评分为' + score + '分，再来一次吧~');
-  resetHead();
-  resetTarget();
+  setHead();
+  setTarget();
   window.location.reload();
 }
 
@@ -210,10 +210,14 @@ document.addEventListener('keydown', function (e) {
     }, 1000);
     flag = false;
   }
-  if ((single ? true : turnUp) && (e.key === 'w' || e.key === 'W' || e.key === 'ArrowUp')) go('up');
-  else if ((single ? true : turnLeft) && (e.key === 'a' || e.key === 'A' || e.key === 'ArrowLeft')) go('left');
-  else if ((single ? true : turnDown) && (e.key === 's' || e.key === 'S' || e.key === 'ArrowDown')) go('down');
-  else if ((single ? true : turnRight) && (e.key === 'd' || e.key === 'D' || e.key === 'ArrowRight')) go('right');
+  if ((single ? true : turnUp) && (e.key === 'w' || e.key === 'W' || e.key === 'ArrowUp'))
+    go('up');
+  else if ((single ? true : turnLeft) && (e.key === 'a' || e.key === 'A' || e.key === 'ArrowLeft'))
+    go('left');
+  else if ((single ? true : turnDown) && (e.key === 's' || e.key === 'S' || e.key === 'ArrowDown'))
+    go('down');
+  else if ((single ? true : turnRight) && (e.key === 'd' || e.key === 'D' || e.key === 'ArrowRight'))
+    go('right');
 })
 
 remind.addEventListener('click', function () {
