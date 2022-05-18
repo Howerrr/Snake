@@ -229,5 +229,5 @@ document.addEventListener('keydown', function (e) {
 })
 
 remind.addEventListener('click', function () {
-  alert('贪吃蛇，wasd或↑←↓→控制方向，要躲开随机生成的障碍哦！加油~ Hower的第一个HTML小游戏 QAQ');
+  alert('贪吃蛇，wasd控制方向，要躲开随机生成的障碍哦！加油~ ');
 })
