@@ -39,7 +39,9 @@ function setTarget() {
   targetX = randomX();
   targetY = randomY();
   for (let i = 0; i < body.length; i++) {
+    body = allBody.querySelectorAll('.body');
     for (let j = 0; j < barrier.length; j++) {
+      barrier = allBarrier.querySelectorAll('.barrier');
       if (targetX === body[i].offsetLeft && targetY === body[i].offsetTop ||
         targetX === barrier[j].offsetLeft && targetY === barrier[j].offsetTop) {
         targetX = randomX();
@@ -67,13 +69,19 @@ function setBarrier() {
   barrierX = randomX();
   barrierY = randomY();
   for (let i = 0; i < body.length; i++) {
-    if (barrierX === body[i].offsetLeft && barrierY === body[i].offsetTop ||
-      Math.abs((barrierX - head.offsetLeft)) < 200 ||
-      Math.abs((barrierX - head.offsetLeft)) < 200 ||
-      barrierX === target.offsetLeft && barrierY === target.offsetTop) {
-      barrierX = randomX();
-      barrierY = randomY();
-      i = 0;
+    body = allBody.querySelectorAll('.body');
+    for (let j = 0; j < barrier.length; j++) {
+      barrier = allBarrier.querySelectorAll('.barrier');
+      if (barrierX === body[i].offsetLeft && barrierY === body[i].offsetTop ||
+        barrierX === barrier[j].offsetLeft && barrierY === barrier[j].offsetTop ||
+        Math.abs((barrierX - head.offsetLeft)) < 200 ||
+        Math.abs((barrierX - head.offsetLeft)) < 200 ||
+        barrierX === target.offsetLeft && barrierY === target.offsetTop) {
+        barrierX = randomX();
+        barrierY = randomY();
+        i = 0;
+        j = 0;
+      }
     }
   }
   newBarrier.style.left = barrierX + 'px';
@@ -204,7 +212,7 @@ function turn(dir) {
 
 document.addEventListener('keydown', function (e) {
   if (flag) {
-    setInterval('setBarrier()', 1500);
+    setInterval('setBarrier()', 1000);
     setInterval(function () {
       time++;
     }, 1000);
