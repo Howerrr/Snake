@@ -148,6 +148,7 @@ function isDead(dir) {
     case 'left': if (head.offsetLeft < 0) gameOver(); break;
     case 'down': if (head.offsetTop > ground.offsetHeight) gameOver(); break;
     case 'right': if (head.offsetLeft > ground.offsetWidth) gameOver(); break;
+    default: break;
   }
   for (let i = 0; i < body.length; i++) {
     if (body[i].offsetLeft === head.offsetLeft &&
@@ -181,6 +182,7 @@ function judge(dir) {
     case 'left': head.style.left = head.offsetLeft - 50 + 'px'; break;
     case 'down': head.style.top = head.offsetTop + 50 + 'px'; break;
     case 'right': head.style.left = head.offsetLeft + 50 + 'px'; break;
+    default: break;
   }
   isGetTarget(dir);
   isDead(dir);
@@ -207,6 +209,7 @@ function turn(dir) {
     case 'left': turnRight = false; break;
     case 'down': turnUp = false; break;
     case 'right': turnLeft = false; break;
+    default: break;
   }
 }
 
