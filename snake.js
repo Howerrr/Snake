@@ -231,3 +231,7 @@ document.addEventListener('keydown', function (e) {
 remind.addEventListener('click', function () {
   alert('贪吃蛇，wasd控制方向，要躲开随机生成的障碍哦！加油~ ');
 })
+
+window.addEventListener('resize', function () {
+  window.location.reload();
+})
