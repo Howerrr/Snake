@@ -128,7 +128,6 @@ function isGetTarget(dir) {
 }
 
 function delectBarrier() {
-  barrier = allBarrier.querySelectorAll('.barrier');
   if (barrier.length > 0)
     allBarrier.removeChild(barrier[0]);
 }
