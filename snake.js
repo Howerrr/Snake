@@ -122,8 +122,15 @@ function isGetTarget(dir) {
     single = false;
     times++;
     setTarget();
+    delectBarrier();
     setBody(dir);
   }
+}
+
+function delectBarrier() {
+  barrier = allBarrier.querySelectorAll('.barrier');
+  if (barrier.length > 1)
+    allBarrier.removeChild(barrier[0]);
 }
 
 function followHead() {
@@ -167,8 +174,6 @@ function gameOver() {
   score = Math.round(times * 3.5 * (1 + 2 / (time + 1)));
   if (score > 100) score = 100;
   alert('本次你坚持了' + time + '秒，吃到了' + times + '次红方块，系统评分为' + score + '分，再来一次吧~');
-  setHead();
-  setTarget();
   window.location.reload();
 }
 
@@ -176,7 +181,6 @@ function judge(dir) {
   body = allBody.querySelectorAll('.body');
   barrier = allBarrier.querySelectorAll('.barrier');
   followHead();
-  // animate(head, dir, 50);
   switch (dir) {
     case 'up': head.style.top = head.offsetTop - 50 + 'px'; break;
     case 'left': head.style.left = head.offsetLeft - 50 + 'px'; break;
@@ -215,7 +219,7 @@ function turn(dir) {
 
 document.addEventListener('keydown', function (e) {
   if (flag) {
-    setInterval('setBarrier()', 1000);
+    setInterval('setBarrier()', 500);
     setInterval(function () {
       time++;
     }, 1000);
