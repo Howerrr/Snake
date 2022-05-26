@@ -121,17 +121,18 @@ function isGetTarget(dir) {
   if (targetX === head.offsetLeft && targetY === head.offsetTop) {
     single = false;
     times++;
-    setTarget();
     delectBarrier();
+    setTarget();
     setBody(dir);
   }
 }
 
 function delectBarrier() {
   barrier = allBarrier.querySelectorAll('.barrier');
-  if (barrier.length > 1)
+  if (barrier.length > 0)
     allBarrier.removeChild(barrier[0]);
 }
+
 
 function followHead() {
   body = allBody.querySelectorAll('.body');
@@ -219,7 +220,7 @@ function turn(dir) {
 
 document.addEventListener('keydown', function (e) {
   if (flag) {
-    setInterval('setBarrier()', 500);
+    setInterval('setBarrier()', 2000 / 3);
     setInterval(function () {
       time++;
     }, 1000);
