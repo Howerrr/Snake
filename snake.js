@@ -239,6 +239,30 @@ remind.addEventListener('click', function () {
   alert('贪吃蛇，wasd控制方向，要躲开随机生成的障碍哦！加油~ ');
 })
 
-window.addEventListener('resize', function () {
-  window.location.reload();
-})
+function debounce(operate, delay) {
+  let time = null
+  let timer = null
+  let newTime = null
+  function task() {
+    newTime = +new Date()
+    if (newTime - time < delay) {
+      timer = setTimeout(task, delay)
+    } else {
+      operate()
+      timer = null
+    }
+    time = newTime
+  }
+  return function () {
+    time = +new Date()
+    if (!timer) {
+      timer = setTimeout(task, delay)
+    }
+  }
+}
+
+function task() {
+  window.location.reload()
+}
+
+window.addEventListener('resize', debounce(task, 200), false)
