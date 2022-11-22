@@ -17,6 +17,8 @@ let headX = randomX();
 let headY = randomY();
 let barrierX = randomX();
 let barrierY = randomY();
+
+let speed = 100
 let time = 0;
 let times = 0;
 let score = 0;
@@ -38,12 +40,14 @@ function randomY() {
 function setTarget() {
   targetX = randomX();
   targetY = randomY();
+  body = allBody.querySelectorAll('.body');
+  barrier = allBarrier.querySelectorAll('.barrier');
   for (let i = 0; i < body.length; i++) {
-    body = allBody.querySelectorAll('.body');
     for (let j = 0; j < barrier.length; j++) {
-      barrier = allBarrier.querySelectorAll('.barrier');
       if (targetX === body[i].offsetLeft && targetY === body[i].offsetTop ||
         targetX === barrier[j].offsetLeft && targetY === barrier[j].offsetTop) {
+        body = allBody.querySelectorAll('.body');
+        barrier = allBarrier.querySelectorAll('.barrier');
         targetX = randomX();
         targetY = randomY();
         i = 0;
@@ -171,7 +175,7 @@ function isDead(dir) {
 
 function gameOver() {
   clearInterval(head.timer);
-  score = Math.round(times * 2 * (1 + 3 / (time + 1)));
+  score = Math.round(times * (speed / 50) * (1 + 3 / (time + 1)));
   if (score > 100) score = 100;
   alert('本次你坚持了' + time + '秒，吃到了' + times + '次红方块，系统评分为' + score + '分，再来一次吧~');
   window.location.reload();
@@ -198,7 +202,7 @@ function go(dir) {
   judge(dir);
   head.timer = setInterval(function () {
     judge(dir);
-  }, 100);
+  }, speed);
 }
 
 gameBegin();
@@ -239,6 +243,7 @@ remind.addEventListener('click', function () {
   alert('贪吃蛇，wasd控制方向，要躲开随机生成的障碍哦！加油~ ');
 })
 
+//防抖
 function debounce(operate, delay) {
   let time = null
   let timer = null
@@ -265,4 +270,4 @@ function task() {
   window.location.reload()
 }
 
-window.addEventListener('resize', debounce(task, 200), false)
+window.addEventListener('resize', debounce(task, 100), false)
