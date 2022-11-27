@@ -175,7 +175,7 @@ function isDead(dir) {
 
 function gameOver() {
   clearInterval(head.timer);
-  score = Math.round(times * (speed / 50) * (2 + 3 / (time + 1)));
+  score = Math.round(times * (speed / 50) * (1.5 + 3 / (time + 1)));
   if (score > 100) score = 100;
   alert('本次你坚持了' + time + '秒，吃到了' + times + '次红方块，系统评分为' + score + '分，再来一次吧~');
   window.location.reload();
